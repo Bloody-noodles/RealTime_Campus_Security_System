@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Campus Security Dashboard</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static',filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>Campus Security Dashboard</h1>
+
+<h3>Federal University Oye-Ekiti</h3>
+
+</div>
+
+<div class="container">
+
+<div class="camera">
+
+<h2>Desktop Detection Engine Running</h2>
+
+<p>
+
+The desktop application performs live object detection.
+
+This dashboard monitors logs and security events.
+
+</p>
+
+</div>
+
+<div class="stats">
+
+<h2>Recent Detections</h2>
+
+<table>
+
+<tr>
+
+<th>Object</th>
+
+<th>Confidence</th>
+
+<th>Time</th>
+
+</tr>
+
+{% for row in events %}
+
+<tr>
+
+<td>{{ row[0] }}</td>
+
+<td>{{ "%.2f"|format(row[1]) }}</td>
+
+<td>{{ row[2] }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
