@@ -1,7 +1,6 @@
-ultralytics
+flask
 opencv-python
-pyttsx3
-torch
-torchvision
+ultralytics
 numpy
+pygame
 pillow

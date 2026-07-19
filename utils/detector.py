@@ -1,5 +1,7 @@
 from ultralytics import YOLO
-from config import MODEL_PATH, CONFIDENCE
+
+from config import MODEL_PATH
+from config import CONFIDENCE
 
 
 class Detector:
@@ -18,13 +20,13 @@ class Detector:
 
             source=frame,
 
-            conf=CONFIDENCE,
-
-            imgsz=640,
-
             persist=True,
 
             tracker="bytetrack.yaml",
+
+            imgsz=512,
+
+            conf=CONFIDENCE,
 
             verbose=False
 

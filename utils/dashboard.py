@@ -1,36 +1,45 @@
 import cv2
+
 from datetime import datetime
-from config import LOGO_PATH
 
 
 class Dashboard:
-
-    def __init__(self):
-
-        self.logo = cv2.imread(str(LOGO_PATH))
-
-        if self.logo is not None:
-            self.logo = cv2.resize(self.logo, (70, 70))
 
     def draw(self, frame, fps, detections):
 
         h, w = frame.shape[:2]
 
-        panel_height = 110
+        overlay = frame.copy()
 
-        cv2.rectangle(frame, (0, 0), (w, panel_height), (35, 35, 35), -1)
+        cv2.rectangle(
 
-        # ----------------------------------
-        # School Logo
-        # ----------------------------------
+            overlay,
 
-        if self.logo is not None:
+            (0, 0),
 
-            frame[20:90, 20:90] = self.logo
+            (w, 110),
 
-        # ----------------------------------
-        # Title
-        # ----------------------------------
+            (25, 25, 25),
+
+            -1
+
+        )
+
+        cv2.addWeighted(
+
+            overlay,
+
+            0.85,
+
+            frame,
+
+            0.15,
+
+            0,
+
+            frame
+
+        )
 
         cv2.putText(
 
@@ -38,11 +47,11 @@ class Dashboard:
 
             "REAL-TIME CAMPUS SECURITY SYSTEM",
 
-            (110, 35),
+            (20, 32),
 
             cv2.FONT_HERSHEY_SIMPLEX,
 
-            0.9,
+            0.85,
 
             (0, 255, 255),
 
@@ -54,71 +63,13 @@ class Dashboard:
 
             frame,
 
-            "Federal University Oye-Ekiti",
-
-            (110, 65),
-
-            cv2.FONT_HERSHEY_SIMPLEX,
-
-            0.55,
-
-            (230, 230, 230),
-
-            1
-
-        )
-
-        # ----------------------------------
-        # Counts
-        # ----------------------------------
-
-        counts = {}
-
-        for obj in detections:
-
-            name = obj["name"]
-
-            counts[name] = counts.get(name, 0) + 1
-
-        x = 420
-
-        for name in sorted(counts):
-
-            cv2.putText(
-
-                frame,
-
-                f"{name.capitalize()}: {counts[name]}",
-
-                (x, 35),
-
-                cv2.FONT_HERSHEY_SIMPLEX,
-
-                0.6,
-
-                (255, 255, 255),
-
-                2
-
-            )
-
-            x += 170
-
-        # ----------------------------------
-        # Bottom info
-        # ----------------------------------
-
-        cv2.putText(
-
-            frame,
-
             f"FPS : {fps:.1f}",
 
-            (20, 100),
+            (20, 70),
 
             cv2.FONT_HERSHEY_SIMPLEX,
 
-            0.7,
+            0.65,
 
             (255, 255, 255),
 
@@ -132,11 +83,11 @@ class Dashboard:
 
             f"Objects : {len(detections)}",
 
-            (170, 100),
+            (170, 70),
 
             cv2.FONT_HERSHEY_SIMPLEX,
 
-            0.7,
+            0.65,
 
             (255, 255, 255),
 
@@ -144,67 +95,57 @@ class Dashboard:
 
         )
 
-        # ----------------------------------
-        # Threat
-        # ----------------------------------
+        threat = any(
 
-        danger = any(
+            d["name"] in ["knife", "gun"]
 
-            obj["name"] in ["knife", "gun"]
-
-            for obj in detections
+            for d in detections
 
         )
 
-        if danger:
+        if threat:
 
-            text = "THREAT DETECTED"
+            status = "THREAT DETECTED"
 
             color = (0, 0, 255)
 
         else:
 
-            text = "SYSTEM SAFE"
+            status = "SAFE"
 
-            color = (0, 140, 0)
-
-        cv2.rectangle(frame, (w-300, 20), (w-20, 90), color, -1)
+            color = (0, 255, 0)
 
         cv2.putText(
 
             frame,
 
-            text,
+            status,
 
-            (w-280, 65),
+            (390, 70),
 
             cv2.FONT_HERSHEY_SIMPLEX,
 
-            0.9,
+            0.70,
 
-            (255,255,255),
+            color,
 
             2
 
         )
 
-        # ----------------------------------
-        # Time
-        # ----------------------------------
-
         cv2.putText(
 
             frame,
 
-            datetime.now().strftime("%d/%m/%Y  %H:%M:%S"),
+            datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
 
-            (w-330, 105),
+            (860, 70),
 
             cv2.FONT_HERSHEY_SIMPLEX,
 
             0.55,
 
-            (255,255,255),
+            (255, 255, 255),
 
             2
 

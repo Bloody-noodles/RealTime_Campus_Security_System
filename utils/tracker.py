@@ -8,11 +8,13 @@ class Tracker:
         detections = []
 
         if len(results) == 0:
+
             return frame, detections
 
         result = results[0]
 
         if result.boxes is None:
+
             return frame, detections
 
         for box in result.boxes:
@@ -25,33 +27,25 @@ class Tracker:
 
             name = result.names[cls]
 
-            ID = -1
+            object_id = -1
 
             if box.id is not None:
 
-                ID = int(box.id.item())
+                object_id = int(box.id.item())
 
-            detections.append({
+            color = (0, 255, 0)
 
-                "id": ID,
-
-                "name": name,
-
-                "conf": conf,
-
-                "box": [x1, y1, x2, y2]
-
-            })
-
-            if name in ["knife", "gun"]:
+            if name == "knife":
 
                 color = (0, 0, 255)
 
-            else:
+            elif name == "gun":
 
-                color = (0, 255, 0)
+                color = (0, 0, 255)
 
-            # Bounding Box
+            elif name == "fire extinguisher":
+
+                color = (0, 165, 255)
 
             cv2.rectangle(
 
@@ -67,69 +61,43 @@ class Tracker:
 
             )
 
-            label = f"{name.upper()}  #{ID}"
+            label = f"{name.upper()}  {conf:.2f}"
 
-            confidence = f"{int(conf*100)}%"
+            if object_id != -1:
 
-            (tw, th), _ = cv2.getTextSize(
+                label = f"{name.upper()} #{object_id} {conf:.2f}"
 
-                label,
-
-                cv2.FONT_HERSHEY_SIMPLEX,
-
-                0.55,
-
-                2
-
-            )
-
-            cv2.rectangle(
+            cv2.putText(
 
                 frame,
 
-                (x1, y1-35),
+                label,
 
-                (x1+tw+95, y1),
+                (x1, y1 - 8),
+
+                cv2.FONT_HERSHEY_SIMPLEX,
+
+                0.6,
 
                 color,
 
-                -1
-
-            )
-
-            cv2.putText(
-
-                frame,
-
-                label,
-
-                (x1+6, y1-12),
-
-                cv2.FONT_HERSHEY_SIMPLEX,
-
-                0.55,
-
-                (255,255,255),
-
                 2
 
             )
 
-            cv2.putText(
+            detections.append(
 
-                frame,
+                {
 
-                confidence,
+                    "id": object_id,
 
-                (x1+tw+15, y1-12),
+                    "name": name,
 
-                cv2.FONT_HERSHEY_SIMPLEX,
+                    "conf": conf,
 
-                0.55,
+                    "box": [x1, y1, x2, y2]
 
-                (255,255,0),
-
-                2
+                }
 
             )
 

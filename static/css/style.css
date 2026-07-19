@@ -1,0 +1,493 @@
+/* ==========================================
+   RESET
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:Arial,Helvetica,sans-serif;
+
+    background:#0f172a;
+
+    color:#fff;
+
+}
+
+/* ==========================================
+   CONTAINER
+========================================== */
+
+.container{
+
+    width:95%;
+
+    max-width:1500px;
+
+    margin:auto;
+
+    padding:20px;
+
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    margin-bottom:25px;
+
+    border-bottom:2px solid #1e40af;
+
+    padding-bottom:15px;
+
+}
+
+.logo{
+
+    width:80px;
+
+    height:80px;
+
+    object-fit:contain;
+
+}
+
+header h1{
+
+    font-size:30px;
+
+    color:#60a5fa;
+
+}
+
+header p{
+
+    color:#cbd5e1;
+
+    margin-top:5px;
+
+}
+
+/* ==========================================
+   CAMERA
+========================================== */
+
+.camera-section{
+
+    margin-bottom:25px;
+
+}
+
+#videoFeed{
+
+    width:100%;
+
+    border-radius:12px;
+
+    border:3px solid #2563eb;
+
+    box-shadow:0 0 20px rgba(37,99,235,.3);
+
+}
+
+/* ==========================================
+   DASHBOARD GRID
+========================================== */
+
+.dashboard{
+
+    display:grid;
+
+    grid-template-columns:350px 1fr;
+
+    gap:20px;
+
+}
+
+.left-panel,
+
+.right-panel{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+/* ==========================================
+   CARDS
+========================================== */
+
+.card{
+
+    background:#1e293b;
+
+    border:1px solid #334155;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.35);
+
+}
+
+.card h2{
+
+    color:#60a5fa;
+
+    margin-bottom:20px;
+
+    font-size:22px;
+
+}
+
+/* ==========================================
+   SUMMARY
+========================================== */
+
+.summary{
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    gap:12px;
+
+}
+
+.summary div{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:12px 15px;
+
+    background:#0f172a;
+
+    border-radius:8px;
+
+    border-left:4px solid #2563eb;
+
+    font-size:17px;
+
+}
+
+.summary span{
+
+    font-weight:bold;
+
+    font-size:20px;
+
+    color:#38bdf8;
+
+}
+
+/* ==========================================
+   STATUS
+========================================== */
+
+#status{
+
+    text-align:center;
+
+    padding:18px;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    border-radius:10px;
+
+}
+
+.safe{
+
+    background:#14532d;
+
+    color:#4ade80;
+
+}
+
+.danger{
+
+    background:#7f1d1d;
+
+    color:#f87171;
+
+}
+
+/* ==========================================
+   TABLE
+========================================== */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+thead{
+
+    background:#2563eb;
+
+}
+
+thead th{
+
+    padding:12px;
+
+    text-align:left;
+
+    color:#fff;
+
+}
+
+tbody tr{
+
+    border-bottom:1px solid #334155;
+
+}
+
+tbody tr:nth-child(even){
+
+    background:#0f172a;
+
+}
+
+tbody td{
+
+    padding:10px;
+
+    color:#e2e8f0;
+
+}
+
+/* ==========================================
+   SCREENSHOT
+========================================== */
+
+#latestCapture{
+
+    width:100%;
+
+    min-height:250px;
+
+    max-height:350px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+
+    border:2px solid #2563eb;
+
+    background:#0f172a;
+
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+footer{
+
+    margin-top:30px;
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    font-size:15px;
+
+    padding:15px;
+
+    border-top:1px solid #334155;
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:900px){
+
+    .dashboard{
+
+        grid-template-columns:1fr;
+
+    }
+
+    header{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+    .logo{
+
+        width:70px;
+
+        height:70px;
+
+    }
+
+    header h1{
+
+        font-size:24px;
+
+    }
+
+    .summary div{
+
+        font-size:15px;
+
+    }
+
+    .summary span{
+
+        font-size:18px;
+
+    }
+
+}
+
+/* ===========================
+   INCIDENT TIMELINE
+=========================== */
+
+.timeline{
+
+    max-height:300px;
+
+    overflow-y:auto;
+
+}
+
+.timeline-item{
+
+    border-left:3px solid #2196f3;
+
+    padding-left:15px;
+
+    margin-bottom:18px;
+
+    position:relative;
+
+}
+
+.timeline-item::before{
+
+    content:"";
+
+    width:12px;
+
+    height:12px;
+
+    background:#2196f3;
+
+    border-radius:50%;
+
+    position:absolute;
+
+    left:-8px;
+
+    top:5px;
+
+}
+
+.timeline-time{
+
+    color:#9aa4b2;
+
+    font-size:13px;
+
+}
+
+.timeline-title{
+
+    color:white;
+
+    font-weight:bold;
+
+    margin-top:4px;
+
+}
+
+.timeline-desc{
+
+    color:#b9c0ca;
+
+    font-size:14px;
+
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+/* ===========================
+   LOGOUT BUTTON
+=========================== */
+
+.header-actions{
+
+    margin-left:auto;
+
+}
+
+.logout-btn{
+
+    display:inline-block;
+
+    padding:10px 20px;
+
+    background:#e53935;
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:8px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.logout-btn:hover{
+
+    background:#c62828;
+
+}

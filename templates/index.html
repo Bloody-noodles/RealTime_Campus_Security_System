@@ -1,79 +1,272 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-
-<meta charset="UTF-8">
-
-<title>Campus Security Dashboard</title>
-
-<link rel="stylesheet"
-href="{{ url_for('static',filename='style.css') }}">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realtime Campus Security System</title>
+    <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+    >
 </head>
-
 <body>
-
-<div class="header">
-
-<h1>Campus Security Dashboard</h1>
-
-<h3>Federal University Oye-Ekiti</h3>
-
-</div>
 
 <div class="container">
 
-<div class="camera">
+    <!-- HEADER -->
 
-<h2>Desktop Detection Engine Running</h2>
+    <header>
 
-<p>
+            <img
+    src="{{ url_for('static', filename='images/fuoye.jpg') }}"
+    class="logo"
+    alt="FUOYE logo">
 
-The desktop application performs live object detection.
+        <div>
 
-This dashboard monitors logs and security events.
+            <h1>
 
-</p>
+                FUOYE CAMPUS SECURITY SYSTEM
 
-</div>
+            </h1>
 
-<div class="stats">
+            <p>
 
-<h2>Recent Detections</h2>
+                Real-Time AI Monitoring Dashboard
 
-<table>
+            </p>
 
-<tr>
+        </div>
 
-<th>Object</th>
+        <div class="header-actions">
 
-<th>Confidence</th>
+    <a href="/logout" class="logout-btn">
 
-<th>Time</th>
+        Logout
 
-</tr>
-
-{% for row in events %}
-
-<tr>
-
-<td>{{ row[0] }}</td>
-
-<td>{{ "%.2f"|format(row[1]) }}</td>
-
-<td>{{ row[2] }}</td>
-
-</tr>
-
-{% endfor %}
-
-</table>
+    </a>
 
 </div>
 
+    </header>
+
+    <!-- LIVE CAMERA -->
+
+    <section class="camera-section">
+
+      
+        <img src="/video_feed" id="videoFeed">
+    </section>
+
+    <!-- DASHBOARD -->
+
+    <div class="dashboard">
+
+        <!-- LEFT -->
+
+        <div class="left-panel">
+
+            <div class="card">
+
+                <h2>
+
+                    Detection Summary
+
+                </h2>
+
+                <div class="summary">
+
+                    <div>
+
+                        Persons
+
+                        <span id="person">
+
+                            0
+
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        Phones
+
+                        <span id="phone">
+
+                            0
+
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        Bottles
+
+                        <span id="bottle">
+
+                            0
+
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        Knife
+
+                        <span id="knife">
+
+                            0
+
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        Gun
+
+                        <span id="gun">
+
+                            0
+
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        FPS
+
+                        <span id="fps">
+
+                            0
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h2>
+
+                    System Status
+
+                </h2>
+
+                <div
+
+                    id="status"
+
+                    class="safe"
+
+                >
+
+                    🟢 SAFE
+
+                </div>
+
+            </div>
+
+        </div>
+
+                <!-- RIGHT PANEL -->
+
+        <div class="right-panel">
+
+            <!-- RECENT DETECTIONS -->
+
+            <div class="card">
+
+                <h2>
+
+                    Recent Detections
+
+                </h2>
+
+                <table id="history">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Object</th>
+
+                            <th>Confidence</th>
+
+                            <th>Time</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+                    <div class="card">
+
+                    <h2>Security Incident Timeline</h2>
+
+                    <div id="timeline">
+
+        </div>
+
 </div>
+
+            <!-- LATEST SCREENSHOT -->
+
+            <div class="card">
+
+                <h2>
+
+                    Latest Screenshot
+
+                </h2>
+
+                <img
+
+                    id="latestCapture"
+
+                    src=""
+
+                    alt="Latest Capture"
+
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 Federal University Oye-Ekiti
+
+        <br>
+
+        Real-Time Campus Security System
+
+    </footer>
+
+</div>
+
+<script
+src="{{ url_for('static', filename='js/script.js') }}">
+</script>
 
 </body>
 

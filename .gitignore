@@ -1,5 +1,33 @@
+# Python
 __pycache__/
-.vscode/
-captures/
-*.db
+*.py[cod]
+
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Database
+detections.db
+
+# Runtime files
+live_data.json
+
+# Model weights
 *.pt
+*.onnx
+
+# Captures
+captures/*
+!captures/.gitkeep
+
+# Logs
+logs/*
+!logs/.gitkeep
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db

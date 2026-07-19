@@ -1,4 +1,6 @@
-import pygame
+import threading
+import winsound
+
 from config import ALARM_SOUND
 
 
@@ -6,28 +8,48 @@ class Alarm:
 
     def __init__(self):
 
-        pygame.mixer.init()
-
         self.playing = False
 
-        try:
-            pygame.mixer.music.load(str(ALARM_SOUND))
-        except Exception:
-            print("Alarm sound not found.")
+        self.thread = None
+
+    def _loop(self):
+
+        while self.playing:
+
+            winsound.PlaySound(
+
+                str(ALARM_SOUND),
+
+                winsound.SND_FILENAME
+
+            )
 
     def play(self):
 
-        if not self.playing:
+        if self.playing:
 
-            try:
-                pygame.mixer.music.play(-1)
-                self.playing = True
-            except Exception:
-                pass
+            return
+
+        self.playing = True
+
+        self.thread = threading.Thread(
+
+            target=self._loop,
+
+            daemon=True
+
+        )
+
+        self.thread.start()
 
     def stop(self):
 
-        if self.playing:
+        self.playing = False
 
-            pygame.mixer.music.stop()
-            self.playing = False
+        winsound.PlaySound(
+
+            None,
+
+            winsound.SND_PURGE
+
+        )
