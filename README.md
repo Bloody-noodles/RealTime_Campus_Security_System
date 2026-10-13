@@ -1,6 +1,6 @@
 # Real-Time Campus Security System
 
-An AI-powered real-time campus security monitoring system developed using **Python**, **Flask**, **OpenCV**, **YOLOv8**, and **SQLite**.
+An AI-powered real-time campus security monitoring system developed using **Python**, **Flask**, **OpenCV**, **YOLOv11n**, and **SQLite**.
 
 ## Features
 
@@ -19,7 +19,7 @@ An AI-powered real-time campus security monitoring system developed using **Pyth
 - Python 3
 - Flask
 - OpenCV
-- Ultralytics YOLOv8
+- Ultralytics YOLOv11n 
 - SQLite
 - HTML
 - CSS
